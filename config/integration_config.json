@@ -1,0 +1,149 @@
+{
+  "version": "1.0.0",
+  "integrations": {
+    "version_control": {
+      "git": {
+        "enabled": true,
+        "repositories": [
+          {
+            "name": "main-repo",
+            "url": "https://github.com/example/main-repo.git",
+            "branch": "main",
+            "auth": {
+              "type": "ssh_key",
+              "key_path": "../config/keys/git_ssh_key"
+            }
+          }
+        ],
+        "commit_signing": {
+          "enabled": false,
+          "key_path": "../config/keys/gpg_signing_key.asc"
+        }
+      }
+    },
+    "ci_cd": {
+      "github_actions": {
+        "enabled": true,
+        "workflow_path": ".github/workflows"
+      },
+      "jenkins": {
+        "enabled": false,
+        "url": "https://jenkins.example.com",
+        "auth": {
+          "type": "basic",
+          "username_path": "../config/keys/jenkins_username.txt",
+          "password_path": "../config/keys/jenkins_password.txt"
+        }
+      }
+    },
+    "project_management": {
+      "jira": {
+        "enabled": false,
+        "url": "https://jira.example.com",
+        "auth": {
+          "type": "api_token",
+          "token_path": "../config/keys/jira_token.txt"
+        },
+        "project_key": "PROJ"
+      },
+      "github_issues": {
+        "enabled": true,
+        "repository": "example/main-repo"
+      }
+    },
+    "communication": {
+      "slack": {
+        "enabled": false,
+        "webhook_url_path": "../config/keys/slack_webhook.txt",
+        "channels": [
+          {
+            "name": "dev-notifications",
+            "events": ["build_failure", "deployment"]
+          }
+        ]
+      },
+      "email": {
+        "enabled": false,
+        "smtp": {
+          "server": "smtp.example.com",
+          "port": 587,
+          "username_path": "../config/keys/email_username.txt",
+          "password_path": "../config/keys/email_password.txt"
+        },
+        "recipients": [
+          "dev-team@example.com"
+        ]
+      }
+    },
+    "cloud": {
+      "aws": {
+        "enabled": false,
+        "region": "us-west-2",
+        "credentials": {
+          "access_key_path": "../config/keys/aws_access_key.txt",
+          "secret_key_path": "../config/keys/aws_secret_key.txt"
+        },
+        "services": [
+          "s3",
+          "lambda",
+          "ec2"
+        ]
+      },
+      "gcp": {
+        "enabled": false,
+        "project_id": "example-project",
+        "credentials_path": "../config/keys/gcp_credentials.json",
+        "services": [
+          "storage",
+          "functions",
+          "compute"
+        ]
+      }
+    },
+    "databases": {
+      "postgresql": {
+        "enabled": false,
+        "host": "db.example.com",
+        "port": 5432,
+        "database": "app_db",
+        "username_path": "../config/keys/pg_username.txt",
+        "password_path": "../config/keys/pg_password.txt",
+        "ssl": true
+      },
+      "mongodb": {
+        "enabled": false,
+        "uri_path": "../config/keys/mongodb_uri.txt",
+        "database": "app_db"
+      }
+    }
+  },
+  "webhooks": {
+    "incoming": {
+      "enabled": true,
+      "endpoints": [
+        {
+          "path": "/webhook/github",
+          "secret_path": "../config/keys/github_webhook_secret.txt",
+          "events": [
+            "push",
+            "pull_request"
+          ]
+        }
+      ]
+    },
+    "outgoing": {
+      "enabled": true,
+      "endpoints": [
+        {
+          "name": "deployment-notification",
+          "url": "https://example.com/deployment-hook",
+          "secret_path": "../config/keys/outgoing_webhook_secret.txt",
+          "events": [
+            "deployment_success",
+            "deployment_failure"
+          ]
+        }
+      ]
+    }
+  }
+}

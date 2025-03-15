@@ -1,0 +1,47 @@
+{
+  "phases": {
+    "learn": {
+      "enabled": true,
+      "timeout": 3600,
+      "sources": [
+        {"type": "repository", "url": "https://github.com/example/repo1", "branch": "main"},
+        {"type": "documentation", "url": "https://docs.example.com/api", "format": "html"},
+        {"type": "dataset", "path": "../data/training_data.json", "format": "json"}
+      ]
+    },
+    "develop": {
+      "enabled": true,
+      "timeout": 7200,
+      "requirements_path": "../data/requirements.json",
+      "output_path": "../memory_bank/data/artifacts"
+    },
+    "deploy": {
+      "enabled": true,
+      "timeout": 1800,
+      "targets_path": "../data/deploy_targets.json",
+      "validation": {
+        "enabled": true,
+        "timeout": 300
+      }
+    }
+  },
+  "metrics": {
+    "collect": true,
+    "storage_path": "../logs/metrics",
+    "report": {
+      "enabled": true,
+      "format": "json",
+      "path": "../logs/reports"
+    }
+  },
+  "feedback": {
+    "enabled": true,
+    "auto_adjust": true,
+    "storage_path": "../memory_bank/data/feedback"
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "../logs/ldd_workflow.log"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+  "agent": {
+    "name": "auto-coder-agent",
+    "description": "コード生成と開発を支援するエージェント",
+    "capabilities": [
+      "code_generation",
+      "code_review",
+      "debugging",
+      "refactoring",
+      "documentation"
+    ]
+  },
+  "execution": {
+    "mode": "autonomous",
+    "timeout": 3600,
+    "max_iterations": 100,
+    "error_handling": {
+      "retry_count": 3,
+      "retry_delay": 5,
+      "fallback_enabled": true
+    }
+  },
+  "resources": {
+    "memory": {
+      "max_mb": 2048,
+      "min_mb": 512
+    },
+    "cpu": {
+      "max_cores": 4,
+      "min_cores": 1
+    },
+    "gpu": {
+      "enabled": false,
+      "type": "none"
+    }
+  },
+  "communication": {
+    "protocols": [
+      {
+        "name": "http",
+        "enabled": true,
+        "port": 8080
+      },
+      {
+        "name": "websocket",
+        "enabled": true,
+        "port": 8081
+      }
+    ],
+    "formats": [
+      "json",
+      "yaml",
+      "text"
+    ]
+  },
+  "tools": {
+    "code_analysis": {
+      "enabled": true,
+      "linters": [
+        "pylint",
+        "eslint",
+        "golint"
+      ],
+      "static_analysis": true
+    },
+    "version_control": {
+      "enabled": true,
+      "system": "git",
+      "auto_commit": false
+    },
+    "testing": {
+      "enabled": true,
+      "frameworks": [
+        "pytest",
+        "jest",
+        "go_test"
+      ],
+      "auto_test": true
+    }
+  },
+  "learning": {
+    "enabled": true,
+    "sources": [
+      "code_repositories",
+      "documentation",
+      "user_feedback"
+    ],
+    "adaptation": {
+      "enabled": true,
+      "rate": 0.1
+    }
+  }
+}

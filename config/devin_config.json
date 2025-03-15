@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "environment": {
+    "name": "auto-coder-agent",
+    "description": "Auto-coder-agent LDD環境",
+    "mode": "development"
+  },
+  "memory_bank": {
+    "enabled": true,
+    "storage_path": "../memory_bank/data",
+    "max_size_mb": 1024,
+    "retention_days": 30,
+    "encryption": {
+      "enabled": false,
+      "key_path": "../config/keys/encryption_key.pem"
+    }
+  },
+  "ldd_workflow": {
+    "enabled": true,
+    "config_path": "../ldd_workflow/config.json",
+    "auto_start": true,
+    "default_phase": "learn"
+  },
+  "knowledge_system": {
+    "enabled": true,
+    "sources": [
+      {
+        "name": "internal_docs",
+        "type": "file",
+        "path": "../data/knowledge",
+        "format": "markdown"
+      },
+      {
+        "name": "external_api",
+        "type": "api",
+        "url": "https://api.example.com/knowledge",
+        "auth": {
+          "type": "bearer",
+          "token_path": "../config/keys/api_token.txt"
+        }
+      }
+    ],
+    "indexing": {
+      "enabled": true,
+      "schedule": "daily",
+      "index_path": "../memory_bank/data/knowledge_index"
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "../logs/devin.log",
+    "rotate": {
+      "enabled": true,
+      "max_size_mb": 10,
+      "backup_count": 5
+    }
+  },
+  "metrics": {
+    "collect": true,
+    "storage_path": "../logs/metrics",
+    "report": {
+      "enabled": true,
+      "format": "json",
+      "path": "../logs/reports"
+    }
+  },
+  "security": {
+    "authentication": {
+      "enabled": true,
+      "method": "token",
+      "token_path": "../config/keys/auth_token.txt"
+    },
+    "authorization": {
+      "enabled": true,
+      "roles_path": "../config/roles.json"
+    }
+  }
+}
