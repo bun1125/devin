@@ -73,7 +73,7 @@ class LDDWorkflow:
             if phase in self.phase_modules:
                 return self.phase_modules[phase]
             
-            module_name = f"{phase}"
+            module_name = f"ldd_workflow.{phase}"
             module = importlib.import_module(module_name)
             
             # モジュールからフェーズクラスを取得
